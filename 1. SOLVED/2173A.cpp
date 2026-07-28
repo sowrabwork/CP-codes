@@ -18,29 +18,25 @@ int main()
         {
             if(arr[i]=='1')
             {
-                cout<<"arr[i]=='1': "<<i<<endl;
                 int limitor=i+k;
                 i++;
                 for(;i<=limitor;i++)
                 {
-                    cout<<"inner loop: "<<i<<endl;
                     if(arr[i]=='1')
                     {
-                        i--;
                         break;
                     }
                 }
+                i--;
             }
             else
             {
                 count++;
-                cout<<"else block "<<i<<endl;
             }
             
 
 
         }
-        cout<<endl;
         for(;i<n;i++)
         {
             if(arr[i]=='0')
