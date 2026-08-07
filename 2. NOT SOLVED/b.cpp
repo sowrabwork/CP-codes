@@ -1,68 +1,66 @@
-#include<iostream>
-#include<vector>
-#include<algorithm>
+#include <iostream>
+#include <algorithm>
+#include <vector>
 using namespace std;
 int main()
 {
     int t;
-    cin>>t;
-    while(t--)
+    cin >> t;
+    while (t--)
     {
-        int m,n;
-        cin>>m>>n;
-        vector<int> arr;
-        vector<int> brr;
-        for(int i=0;i<m;i++)
+        int n;
+        cin >> n;
+        string arr;
+        cin >> arr;
+
+        int zero_pair = 0;
+        int one_pair = 0;
+        int zero_cnt = 0;
+        int one_cnt = 0;
+        string remaining_str;
+        for (int i = 0; i < n; i++)
         {
-            int temp;
-            cin>>temp;
-            arr.push_back(temp);
-        }
-        for(int i=0;i<n;i++)
-        {
-            int temp;
-            cin>>temp;
-            brr.push_back(temp);
-        }
-        
-        sort(arr.begin(),arr.end());
-        sort(brr.begin(),brr.end());
-        int iter=0;
-        int L=0,R=0;
-        bool ans=true;
-        bool marked[m];
-        while(L>=0 && R<m && iter!=m)
-        {
-            if(arr[L]==brr[iter] && !marked[L])
+            if (arr[i] == arr[i + 1] && i < n - 1)
             {
-                iter++;
-                marked[L]=true;
-                
+                if (arr[i] == '0')
+                    zero_pair++;
+                else
+                    one_pair++;
             }
-            else if(arr[L]<brr[iter] && arr[R]>brr[iter] && !marked[L] && !marked[R])
+            if (arr[i] == '0')
+                zero_cnt++;
+            else
+                one_cnt++;
+        }
+        int remaing_zero = zero_cnt - zero_pair;
+        int remaing_one = one_cnt - one_pair;
+        int remaining_oper = zero_pair - one_pair;
+        int opercnt = zero_pair + one_pair;
+        if (remaining_oper > 1)
+        {
+            if (remaing_one >= remaining_oper - 1)
             {
-                iter++;
-                marked[L]=true;
-                marked[R]=true;
+                opercnt += remaining_oper - 1;
             }
             else
             {
-                if(arr[L]>brr[iter] || marked[L])
-                {
-                    L--;
-                }
-                if(arr[R]<brr[iter] || marked[R])
-                {
-                    R++;
-                }
+                opercnt = -1;
             }
-            
+        }
+        else if (remaining_oper < -1)
+        {
+            remaining_oper=abs(remaining_oper);
+            if (remaing_zero >= remaining_oper - 1)
+            {
+                opercnt += remaining_oper - 1;
+            }
+            else
+            {
+                opercnt = -1;
+            }
+
         }
 
-        if(iter>=n)
-        cout<<"yes"<<endl;
-        else
-        cout<<"no"<<endl;
+        cout << opercnt << endl;
     }
 }
-
