@@ -1,0 +1,1 @@
+  cout<<arr[i]<<" "<<freqs[arr[i]]<<endl;
