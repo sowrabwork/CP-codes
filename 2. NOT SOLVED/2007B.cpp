@@ -14,7 +14,7 @@ int main()
         for (long long int i = 0; i < n; i++)
             cin >> arr[i];
         cin.ignore();
-        vector<string> operations(m);
+        vector<string> operations(m);                                                                                               
         for (long long int i = 0; i < m; i++)
             getline(cin, operations[i]);
         for (long long int i = 0; i < m; i++)
